@@ -8,7 +8,7 @@ df = pd.read_csv('financial.csv', sep=";")
 df_clean = df.dropna().drop_duplicates()
 df_clean = df_clean.rename(columns=lambda x: x.strip())
 
-# Converter valores para floats uma vez que estão sendo concatenados e não somados
+# Converter valores para floats uma vez que estão concatenados e não somados
 df_clean["Gross Sales"] = df_clean['Gross Sales'].str.replace(',', '').astype(float)
 df_clean["Profit"] = df_clean['Profit'].str.replace(',', '').astype(float)
 
@@ -19,7 +19,7 @@ df_clean['Month'] = pd.to_datetime(df_clean['Date']).dt.month_name()
 fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(18, 12))
 plt.subplots_adjust(hspace=0.8)  # Ajustar espaçamento vertical
 
-# 1 Gráfico - Vendas por Ano (Redondo)
+# 1 Gráfico - Vendas por Ano 
 axs[0, 0].pie(df_clean.groupby('Year')['Gross Sales'].sum(), labels=df_clean['Year'].unique(), autopct='%1.1f%%', startangle=90)
 axs[0, 0].set_title('Vendas por Ano')
 
@@ -33,7 +33,7 @@ lucro_por_ano = df_clean.groupby('Year')['Profit'].sum()
 lucro_por_ano.plot(kind='bar', color='lightgreen', edgecolor='black', ax=axs[0, 2], rot=30)
 axs[0, 2].set_title('Lucro por Ano')
 
-# Adicionar mais espaçamento entre as linhas de gráficos
+# Adicionar mais espaço entre as linhas de gráficos
 plt.subplots_adjust(hspace=0.5)
 
 # 4 Gráfico - Top 5 Gross Sales por Cliente
